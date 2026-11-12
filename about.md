@@ -1,12 +1,12 @@
 ---
 layout: page
 title: 关于
-description: Tools Directory 是一个通过 Markdown 和 Git 维护的全品类工具导航平台。
+description: ToolsHub Max 是一个通过 Markdown 和 Git 维护的全品类工具导航平台。
 ---
 
-# 关于 Tools Directory
+# 关于 ToolsHub Max
 
-Tools Directory 是一个面向开发者、设计师、产品经理、运营人员和普通用户的全品类数字工具导航平台。
+ToolsHub Max 是一个面向开发者、设计师、产品经理、运营人员和普通用户的全品类数字工具导航平台。
 
 ## 我们做什么
 
@@ -24,4 +24,4 @@ Tools Directory 是一个面向开发者、设计师、产品经理、运营人�
 
 ## 联系我们
 
-欢迎通过 [GitHub](https://github.com/example/tools-directory) 反馈问题或建议。
+欢迎通过 [GitHub](https://github.com/cashely/toolsHub) 反馈问题或建议。

@@ -1,6 +1,6 @@
 # 全品类工具导航平台 — 产品与技术方案
 
-**项目名称：** Tools Directory  
+**项目名称：** ToolsHub Max  
 **项目类型：** 静态工具收录与展示平台  
 **核心技术：** VPress + Markdown + Vue + GitHub + Vercel  
 **部署模式：** 静态网站部署  
@@ -208,7 +208,7 @@ Markdown 文件分为四种类型：
 建议将内容目录与网站程序目录分开。
 
 ```text
-tools-directory/
+toolshub-max/
 │
 ├── docs/
 │   ├── index.md
@@ -733,7 +733,7 @@ tools:
 `data/site.yaml`
 
 ```yaml
-name: Tools Directory
+name: ToolsHub Max
 
 description: Discover useful digital tools for work, development and creativity.
 
@@ -741,7 +741,7 @@ url: https://example.com
 
 language: zh-CN
 
-github: https://github.com/example/tools-directory
+github: https://github.com/cashely/toolsHub
 
 navigation:
   - name: 首页

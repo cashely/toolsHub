@@ -1,13 +1,13 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Tools Directory',
+  title: 'ToolsHub Max',
   description: '全品类数字工具导航平台，收录 AI、开发、设计、办公、营销等领域的优质工具。',
   cleanUrls: true,
   // 从每个文件最后一次 git 提交提取更新时间，供页面「文档更新时间」展示
   lastUpdated: true,
   sitemap: {
-    hostname: 'https://tools-directory.example.com',
+    hostname: 'https://toolshub-max.example.com',
   },
   ignoreDeadLinks: true,
   srcExclude: ['README.md', 'writing-block.md'],
@@ -25,17 +25,17 @@ export default defineConfig({
         rel: 'stylesheet',
       },
     ],
-    ['meta', { property: 'og:site_name', content: 'Tools Directory' }],
+    ['meta', { property: 'og:site_name', content: 'ToolsHub Max' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
   ],
   themeConfig: {
     socialLink: {
       icon: 'github',
-      link: 'https://github.com/example/tools-directory',
+      link: 'https://github.com/cashely/toolsHub',
     },
   },
   transformHead({ pageData, siteData }) {
-    const siteUrl = 'https://tools-directory.example.com'
+    const siteUrl = 'https://toolshub-max.example.com'
     const route = pageData.relativePath
       .replace(/^index\.md$/, '')
       .replace(/\.md$/, '')

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 提交工具
-description: 了解如何向 Tools Directory 提交一个新工具。
+description: 了解如何向 ToolsHub Max 提交一个新工具。
 ---
 
 # 提交工具
@@ -26,7 +26,7 @@ description: 了解如何向 Tools Directory 提交一个新工具。
 
 ## 提交方式
 
-在 [GitHub Issues](https://github.com/example/tools-directory/issues) 中按模板提供以下信息：
+在 [GitHub Issues](https://github.com/cashely/toolsHub/issues) 中按模板提供以下信息：
 
 - 工具名称与官网
 - 一句话介绍

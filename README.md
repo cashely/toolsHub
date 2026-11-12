@@ -1,4 +1,4 @@
-# Tools Directory
+# ToolsHub Max
 
 全品类数字工具导航平台：一个工具一个 Markdown 文件，构建时校验并生成索引，无数据库、无后端，部署到 Vercel。
 

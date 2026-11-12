@@ -1,9 +1,9 @@
-name: Tools Directory
+name: ToolsHub Max
 tagline: 发现优质数字工具
 description: 全品类数字工具导航平台，收录 AI、开发、设计、办公、营销等领域的优质工具与在线服务。
-url: https://tools-directory.example.com
+url: https://toolshub-max.example.com
 language: zh-CN
-github: https://github.com/example/tools-directory
+github: https://github.com/cashely/toolsHub
 navigation:
   - name: 首页
     path: /
