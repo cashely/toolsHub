@@ -1,0 +1,209 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--td-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: var(--td-bg);
+  color: var(--td-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ---------- 通用容器 ---------- */
+.td-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 640px) {
+  .td-container {
+    padding: 0 16px;
+  }
+}
+
+/* ---------- 区块标题 ---------- */
+.td-section {
+  padding: 56px 0;
+}
+
+.td-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.td-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.td-section-sub {
+  margin: 6px 0 0;
+  color: var(--td-text-muted);
+  font-size: 14px;
+}
+
+.td-link-more {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--td-primary);
+  white-space: nowrap;
+}
+
+.td-link-more:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Markdown 正文（工具详情 / 普通页面） ---------- */
+.td-doc {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--td-text-secondary);
+}
+
+.td-doc h1 {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--td-text);
+  margin: 0 0 16px;
+}
+
+.td-doc h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--td-text);
+  margin: 36px 0 14px;
+  padding-top: 8px;
+}
+
+.td-doc h3 {
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--td-text);
+  margin: 24px 0 8px;
+}
+
+.td-doc p {
+  margin: 12px 0;
+}
+
+.td-doc ul {
+  margin: 12px 0;
+  padding-left: 22px;
+}
+
+.td-doc li {
+  margin: 6px 0;
+}
+
+.td-doc li::marker {
+  color: var(--td-primary);
+}
+
+.td-doc a {
+  color: var(--td-primary);
+  font-weight: 500;
+}
+
+.td-doc a:hover {
+  text-decoration: underline;
+}
+
+.td-doc blockquote {
+  margin: 16px 0 24px;
+  padding: 14px 18px;
+  border-left: 3px solid transparent;
+  border-image: var(--td-gradient-brand) 1;
+  background: var(--td-primary-soft);
+  border-radius: 0 var(--td-radius-md) var(--td-radius-md) 0;
+  color: var(--td-text-secondary);
+}
+
+.td-doc blockquote p {
+  margin: 0;
+}
+
+.td-doc code {
+  font-family: var(--td-font-mono);
+  font-size: 0.88em;
+  background: var(--td-bg-subtle);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.td-doc pre {
+  margin: 16px 0;
+  padding: 16px 18px;
+  background: var(--td-bg-subtle);
+  border: 1px solid var(--td-border);
+  border-radius: var(--td-radius-md);
+  overflow-x: auto;
+}
+
+.td-doc pre code {
+  padding: 0;
+  background: none;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre;
+}
+
+.td-doc hr {
+  border: none;
+  border-top: 1px solid var(--td-border);
+  margin: 32px 0;
+}
+
+/* ---------- 动画 ---------- */
+@keyframes td-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes td-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.td-fade-up {
+  animation: td-fade-up 0.5s ease both;
+}

@@ -1,0 +1,47 @@
+- id: ai-coding
+  name: AI Coding
+  description: AI 辅助编程相关工具
+
+- id: agent
+  name: Agent
+  description: 智能 Agent 与自主执行工具
+
+- id: code-editor
+  name: Code Editor
+  description: 代码编辑器与 IDE
+
+- id: open-source
+  name: 开源
+  description: 开源软件与项目
+
+- id: no-code
+  name: No Code
+  description: 无代码与低代码工具
+
+- id: note-taking
+  name: 笔记
+  description: 笔记与知识记录工具
+
+- id: automation
+  name: 自动化
+  description: 工作流与任务自动化
+
+- id: collaboration
+  name: 协作
+  description: 团队协作与沟通工具
+
+- id: cloud
+  name: 云服务
+  description: 云计算与托管平台
+
+- id: api
+  name: API
+  description: API 与开发者接口
+
+- id: design
+  name: 设计
+  description: 设计创作类工具
+
+- id: free
+  name: 免费
+  description: 提供免费使用额度或完全免费

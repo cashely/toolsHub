@@ -1,0 +1,187 @@
+- id: ai
+  slug: ai
+  name: AI 与智能
+  description: 收集人工智能领域的对话、Agent、编程、绘画、视频与音频工具。
+  icon: sparkles
+  sort: 1
+  children:
+    - id: ai-chat
+      name: AI 对话
+    - id: ai-agent
+      name: AI Agent
+    - id: ai-coding
+      name: AI 编程
+    - id: ai-image
+      name: AI 绘画
+    - id: ai-video
+      name: AI 视频
+    - id: ai-audio
+      name: AI 音频
+
+- id: development
+  slug: development
+  name: 开发与技术
+  description: IDE、代码托管、前后端框架、数据库、API 与 DevOps 工具。
+  icon: code
+  sort: 2
+  children:
+    - id: ide
+      name: IDE
+    - id: code-hosting
+      name: 代码托管
+    - id: frontend
+      name: 前端框架
+    - id: backend
+      name: 后端框架
+    - id: database
+      name: 数据库
+    - id: api
+      name: API
+    - id: devops
+      name: DevOps
+
+- id: design
+  slug: design
+  name: 设计与创意
+  description: UI 设计、原型、图片处理、视频剪辑、3D 与素材资源。
+  icon: palette
+  sort: 3
+  children:
+    - id: ui-design
+      name: UI 设计
+    - id: prototyping
+      name: 原型设计
+    - id: image
+      name: 图片处理
+    - id: video
+      name: 视频剪辑
+    - id: 3d
+      name: 3D
+    - id: assets
+      name: 素材资源
+
+- id: productivity
+  slug: productivity
+  name: 办公与效率
+  description: 笔记、文档、项目管理、协作、自动化与时间管理工具。
+  icon: bolt
+  sort: 4
+  children:
+    - id: notes
+      name: 笔记
+    - id: docs
+      name: 文档
+    - id: project-management
+      name: 项目管理
+    - id: collaboration
+      name: 协作
+    - id: automation
+      name: 自动化
+    - id: time
+      name: 时间管理
+
+- id: marketing
+  slug: marketing
+  name: 营销与运营
+  description: SEO、社媒管理、数据分析、邮件营销与广告投放工具。
+  icon: megaphone
+  sort: 5
+  children:
+    - id: seo
+      name: SEO
+    - id: social-media
+      name: 社媒管理
+    - id: analytics
+      name: 数据分析
+    - id: email
+      name: 邮件营销
+    - id: ads
+      name: 广告投放
+
+- id: education
+  slug: education
+  name: 学习与教育
+  description: 在线课程、编程学习、语言学习与知识管理。
+  icon: book
+  sort: 6
+  children:
+    - id: courses
+      name: 在线课程
+    - id: coding-learning
+      name: 编程学习
+    - id: language
+      name: 语言学习
+    - id: knowledge
+      name: 知识管理
+
+- id: data
+  slug: data
+  name: 数据与研究
+  description: 数据可视化、数据采集、搜索引擎与科研工具。
+  icon: chart
+  sort: 7
+  children:
+    - id: viz
+      name: 数据可视化
+    - id: collection
+      name: 数据采集
+    - id: search-engine
+      name: 搜索引擎
+    - id: research
+      name: 科研工具
+
+- id: infrastructure
+  slug: infrastructure
+  name: 云服务与基础设施
+  description: 云平台、服务器、CDN、存储、监控与安全服务。
+  icon: cloud
+  sort: 8
+  children:
+    - id: cloud
+      name: 云平台
+    - id: server
+      name: 服务器
+    - id: cdn
+      name: CDN
+    - id: storage
+      name: 存储
+    - id: monitoring
+      name: 监控
+    - id: security
+      name: 安全
+
+- id: utilities
+  slug: utilities
+  name: 生活与实用
+  description: 在线转换、计算器、地图、文件处理与生活服务。
+  icon: wrench
+  sort: 9
+  children:
+    - id: converter
+      name: 在线转换
+    - id: calculator
+      name: 计算器
+    - id: maps
+      name: 地图
+    - id: file
+      name: 文件处理
+    - id: life
+      name: 生活服务
+
+- id: business
+  slug: business
+  name: 商业与创业
+  description: 电商、支付、CRM、SaaS 与财务管理工具。
+  icon: briefcase
+  sort: 10
+  children:
+    - id: ecommerce
+      name: 电商
+    - id: payments
+      name: 支付
+    - id: crm
+      name: CRM
+    - id: saas
+      name: SaaS
+    - id: finance
+      name: 财务管理

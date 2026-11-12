@@ -1,0 +1,21 @@
+name: Tools Directory
+tagline: 发现优质数字工具
+description: 全品类数字工具导航平台，收录 AI、开发、设计、办公、营销等领域的优质工具与在线服务。
+url: https://tools-directory.example.com
+language: zh-CN
+github: https://github.com/example/tools-directory
+navigation:
+  - name: 首页
+    path: /
+  - name: 分类
+    path: /categories/
+  - name: 全部工具
+    path: /tools/
+  - name: Agent 生态
+    path: /agent/
+  - name: 专题
+    path: /collections/
+  - name: 开源精选
+    path: /opensource
+  - name: 关于
+    path: /about
