@@ -1,6 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import { defineComponent, h } from 'vue'
 import { useData } from 'vitepress'
+import SiteBackdrop from './components/SiteBackdrop.vue'
 import './styles/tokens.css'
 import './styles/base.css'
 
@@ -11,7 +12,6 @@ import CollectionLayout from './layouts/CollectionLayout.vue'
 import DirectoryLayout from './layouts/DirectoryLayout.vue'
 import CategoriesIndexLayout from './layouts/CategoriesIndexLayout.vue'
 import CollectionsIndexLayout from './layouts/CollectionsIndexLayout.vue'
-import AgentHubLayout from './layouts/AgentHubLayout.vue'
 import AgentItemLayout from './layouts/AgentItemLayout.vue'
 import PageLayout from './layouts/PageLayout.vue'
 import ResourceGroupLayout from './layouts/ResourceGroupLayout.vue'
@@ -24,7 +24,6 @@ const layouts: Record<string, any> = {
   directory: DirectoryLayout,
   'categories-index': CategoriesIndexLayout,
   'collections-index': CollectionsIndexLayout,
-  'agent-hub': AgentHubLayout,
   'agent-item': AgentItemLayout,
   page: PageLayout,
   'resource-groups': ResourceGroupLayout,
@@ -42,7 +41,7 @@ const Layout = defineComponent({
     return () => {
       const name = (frontmatter.value.layout as string) ?? 'doc'
       const comp = layouts[name]
-      return comp ? h(comp) : h(DefaultTheme.Layout)
+      return [h(SiteBackdrop), comp ? h(comp) : h(DefaultTheme.Layout)]
     }
   },
 })

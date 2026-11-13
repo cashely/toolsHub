@@ -6,8 +6,9 @@ defineProps<{ tools: Tool[] }>()
 </script>
 
 <template>
-  <div v-if="tools.length" class="tool-grid">
+  <div v-if="tools.length || $slots.default" class="tool-grid">
     <ToolCard v-for="tool in tools" :key="tool.id" :tool="tool" />
+    <slot />
   </div>
   <div v-else class="empty">没有符合条件的工具</div>
 </template>

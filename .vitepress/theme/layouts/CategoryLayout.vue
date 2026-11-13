@@ -1,17 +1,85 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, Content } from 'vitepress'
 import SiteChrome from '../components/SiteChrome.vue'
 import ToolGrid from '../components/ToolGrid.vue'
 import CategoryIcon from '../components/CategoryIcon.vue'
 import DocUpdated from '../components/DocUpdated.vue'
-import { categories, publishedTools, matchCategory, sortFeatured } from '../utils/content'
+import {
+  categories,
+  publishedTools,
+  publishedAgentItems,
+  matchCategory,
+  sortFeatured,
+  sortAgentItems,
+  AGENT_KIND_LABELS,
+} from '../utils/content'
+import AgentCard from '../components/AgentCard.vue'
 
 const route = useRoute()
 const activeSub = ref<string | null>(null)
 
 const category = computed(
   () => categories.find((c: any) => c.path === route.path) ?? categories[0],
+)
+
+/** Agent 资源（Skill/MCP/插件）作为二级 tab 并入 AI 分类 */
+const AGENT_KINDS = ['skill', 'mcp', 'plugin'] as const
+const agentTabs = computed(() =>
+  category.value.id === 'ai'
+    ? AGENT_KINDS.map((kind) => ({
+        id: kind,
+        name: AGENT_KIND_LABELS[kind],
+        items: sortAgentItems(
+          publishedAgentItems.filter((a) => a.kind === kind),
+        ),
+      })).filter((t) => t.items.length > 0)
+    : [],
+)
+
+/** 运行时重算工具数（json count 可能滞后），仅保留有工具的二级分类 */
+const toolSubs = computed(() =>
+  (category.value.children ?? [])
+    .map((ch: any) => ({
+      ...ch,
+      count: publishedTools.filter((t) =>
+        matchCategory(t, category.value.id, ch.id),
+      ).length,
+    }))
+    .filter((ch: any) => ch.count > 0),
+)
+
+/** 展示顺序：AI 分类中 Agent tab 插在「AI 编程」之后 */
+const tabs = computed(() => {
+  const result: any[] = []
+  let inserted = false
+  for (const s of toolSubs.value) {
+    result.push(s)
+    if (category.value.id === 'ai' && s.id === 'ai-coding') {
+      result.push(...agentTabs.value.map((t) => ({ id: t.id, name: t.name })))
+      inserted = true
+    }
+  }
+  if (!inserted)
+    result.push(...agentTabs.value.map((t) => ({ id: t.id, name: t.name })))
+  return result
+})
+
+/** 首页「更多」带 #tab-id 跳入时，直接选中对应二级 tab */
+onMounted(() => {
+  const h = decodeURIComponent(location.hash.replace(/^#/, ''))
+  if (h && tabs.value.some((t) => t.id === h)) {
+    activeSub.value = h
+  }
+})
+
+function selectSub(id: string | null) {
+  activeSub.value = activeSub.value === id ? null : id
+  history.replaceState(null, '', activeSub.value ? `#${activeSub.value}` : route.path)
+}
+
+const activeAgentTab = computed(() =>
+  agentTabs.value.find((t) => t.id === activeSub.value),
 )
 
 const list = computed(() => {
@@ -44,23 +112,23 @@ const list = computed(() => {
         <span class="count">{{ list.length }} 个工具</span>
       </header>
 
-      <div v-if="category.children.length" class="sub-row">
+      <div v-if="tabs.length" class="seg-tabs sub-row">
         <button
-          class="sub-chip"
+          class="seg-tab"
           :class="{ active: activeSub === null }"
-          @click="activeSub = null"
+          @click="selectSub(null)"
         >
           全部
         </button>
         <button
-          v-for="sub in category.children"
-          :key="sub.id"
-          class="sub-chip"
-          :class="{ active: activeSub === sub.id }"
-          @click="activeSub = activeSub === sub.id ? null : sub.id"
+          v-for="t in tabs"
+          :key="t.id"
+          class="seg-tab"
+          :class="{ active: activeSub === t.id }"
+          @click="selectSub(t.id)"
         >
-          {{ sub.name }}
-          <span class="sub-count">{{ sub.count }}</span>
+          {{ t.name }}
+          <span v-if="t.count != null" class="tab-count">{{ t.count }}</span>
         </button>
       </div>
 
@@ -69,7 +137,10 @@ const list = computed(() => {
         <DocUpdated />
       </article>
 
-      <ToolGrid :tools="list" />
+      <div v-if="activeAgentTab" class="agent-grid">
+        <AgentCard v-for="item in activeAgentTab.items" :key="item.id" :item="item" />
+      </div>
+      <ToolGrid v-else :tools="list" />
     </div>
   </SiteChrome>
 </template>
@@ -103,6 +174,8 @@ const list = computed(() => {
   margin-top: 24px;
   padding: 32px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
 }
@@ -144,45 +217,16 @@ const list = computed(() => {
   white-space: nowrap;
 }
 
+/* tab 视觉为全局 .seg-tabs，此处只保留区块间距 */
 .sub-row {
-  display: flex;
-  gap: 8px;
   margin: 24px 0 28px;
-  flex-wrap: wrap;
 }
 
-.sub-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 34px;
-  padding: 0 14px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--td-text-secondary);
-  background: var(--td-surface);
-  border: 1px solid var(--td-border);
-  border-radius: var(--td-radius-pill);
-  transition: all 0.15s;
-}
-
-.sub-chip:hover {
-  border-color: var(--td-border-strong);
-}
-
-.sub-chip.active {
-  color: #fff;
-  background: var(--td-gradient-brand);
-  border-color: transparent;
-}
-
-.sub-chip.active .sub-count {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.sub-count {
-  font-size: 11.5px;
-  color: var(--td-text-muted);
+/* Agent 资源网格与工具网格对齐 */
+.agent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: 18px;
 }
 
 .cat-body {

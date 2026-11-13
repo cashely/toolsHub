@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { site } from '../utils/content'
 
+const year = new Date().getFullYear()
+
 const links = [
-  { name: 'Agent 生态', path: '/agent/' },
   { name: '专题合集', path: '/collections/' },
   { name: '关于', path: '/about' },
   { name: '投稿', path: '/submit' },
@@ -11,7 +12,7 @@ const links = [
 
 <template>
   <footer class="page-footer">
-    <span>© 2025 {{ site.name }}</span>
+    <span>© {{ year }} {{ site.name }}</span>
     <a v-for="link in links" :key="link.path" :href="link.path">
       {{ link.name }}
     </a>

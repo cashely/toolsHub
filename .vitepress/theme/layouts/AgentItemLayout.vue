@@ -38,7 +38,7 @@ const hueByKind: Record<string, number> = {
       <nav class="breadcrumb">
         <a href="/">首页</a>
         <span>/</span>
-        <a href="/agent/">Agent 生态</a>
+        <a href="/categories/ai">AI 与智能</a>
         <span>/</span>
         <em>{{ item.name }}</em>
       </nav>
@@ -206,6 +206,8 @@ const hueByKind: Record<string, number> = {
   margin-top: 24px;
   padding: 28px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
   box-shadow: var(--td-shadow-xs);
@@ -333,6 +335,8 @@ const hueByKind: Record<string, number> = {
 .content-card {
   padding: 32px 36px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
 }
@@ -348,6 +352,8 @@ const hueByKind: Record<string, number> = {
 .side-card {
   padding: 20px 22px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-lg);
 }

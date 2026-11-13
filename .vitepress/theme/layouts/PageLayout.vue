@@ -25,6 +25,8 @@ import DocUpdated from '../components/DocUpdated.vue'
   margin: 0 auto;
   padding: 40px 48px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
 }

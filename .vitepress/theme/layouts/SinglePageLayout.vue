@@ -7,8 +7,8 @@ import {
 } from '../utils/content'
 import { searchState } from '../utils/searchState'
 import SideNav from '../components/SideNav.vue'
-import CategoryIcon from '../components/CategoryIcon.vue'
-import ToolGrid from '../components/ToolGrid.vue'
+import HomeHero from '../components/HomeHero.vue'
+import CategorySection from '../components/CategorySection.vue'
 import SearchModal from '../components/SearchModal.vue'
 import PageFooter from '../components/PageFooter.vue'
 
@@ -80,29 +80,17 @@ function onGlobalKey(e: KeyboardEvent) {
     <SideNav mode="spy" :active-id="activeId" @navigate="scrollToCat" />
 
     <main class="sn-main home">
-      <section
-        v-for="g in groups"
-        :id="`cat-${g.id}`"
-        :key="g.id"
-        class="cat-section"
-      >
-        <header class="section-head">
-          <span
-            class="section-icon"
-            :style="{ color: `hsl(var(--td-cat-${g.id}) 60% 48%)` }"
-          >
-            <CategoryIcon :name="g.icon" :size="20" />
-          </span>
-          <div class="heading">
-            <h2>{{ g.name }}</h2>
-            <p>{{ g.description }}</p>
-          </div>
-          <span class="section-count">{{ g.tools.length }} 个</span>
-        </header>
-        <ToolGrid :tools="g.tools" />
-      </section>
+      <HomeHero />
 
-      <PageFooter />
+      <div class="home-body">
+        <CategorySection
+          v-for="g in groups"
+          :key="g.id"
+          :group="g"
+        />
+
+        <PageFooter />
+      </div>
     </main>
 
     <SearchModal />
@@ -110,62 +98,13 @@ function onGlobalKey(e: KeyboardEvent) {
 </template>
 
 <style scoped>
-.home {
-  padding: 40px 48px 0;
-}
-
-.cat-section {
-  scroll-margin-top: 24px;
-  padding-bottom: 64px;
-}
-
-.section-head {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 22px;
-}
-
-.section-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--td-radius-md);
-  background: var(--td-surface);
-  border: 1px solid var(--td-border);
-  flex-shrink: 0;
-}
-
-.heading h2 {
-  margin: 0;
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.heading p {
-  margin: 3px 0 0;
-  font-size: 13px;
-  color: var(--td-text-muted);
-}
-
-.section-count {
-  margin-left: auto;
-  font-size: 12.5px;
-  color: var(--td-text-muted);
-  flex-shrink: 0;
+.home-body {
+  padding: 36px 48px 0;
 }
 
 @media (max-width: 900px) {
-  .home {
+  .home-body {
     padding: 28px 16px 0;
-  }
-
-  .cat-section {
-    scroll-margin-top: 104px;
-    padding-bottom: 44px;
   }
 }
 </style>

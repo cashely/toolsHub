@@ -143,6 +143,8 @@ function reset() {
   padding: 0 14px;
   color: var(--td-text-muted);
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: 1px solid var(--td-border);
   border-radius: var(--td-radius-md);
 }
@@ -164,6 +166,8 @@ function reset() {
   font-family: inherit;
   color: var(--td-text-secondary);
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: 1px solid var(--td-border);
   border-radius: var(--td-radius-md);
   outline: none;

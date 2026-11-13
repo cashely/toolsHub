@@ -21,28 +21,37 @@
   --td-gray-900: #161922;
   --td-gray-950: #0d0f15;
 
-  /* ---- Semantic: Light ---- */
-  --td-bg: #f6f7fb;
-  --td-bg-subtle: #eef0f7;
-  --td-surface: #ffffff;
-  --td-surface-hover: #fafbff;
-  --td-border: #e6e9f2;
-  --td-border-strong: #d3d8e6;
-  --td-text: #171a24;
+  /* ---- Semantic: Light · Aurora 玻璃 ---- */
+  --td-bg: #eef1f8;
+  --td-bg-subtle: rgba(120, 130, 170, 0.12);
+  --td-surface: rgba(255, 255, 255, 0.6);
+  --td-surface-hover: rgba(255, 255, 255, 0.78);
+  --td-border: rgba(255, 255, 255, 0.75);
+  --td-border-strong: rgba(99, 102, 241, 0.4);
+  --td-text: #1b2030;
   --td-text-secondary: #4d5468;
-  --td-text-muted: #8b91a5;
+  --td-text-muted: #7e859b;
   --td-primary: var(--td-indigo-600);
   --td-primary-hover: #4338ca;
-  --td-primary-soft: #eef0fe;
+  --td-primary-soft: rgba(99, 102, 241, 0.1);
   --td-primary-contrast: #ffffff;
   --td-accent: var(--td-violet-500);
   --td-gradient-brand: linear-gradient(135deg, #6366f1 0%, #8b5cf6 55%, #d946ef 100%);
-  --td-gradient-hero: radial-gradient(1200px 500px at 50% -200px, rgba(99, 102, 241, 0.14), transparent 70%);
+  --td-gradient-hero: radial-gradient(
+      1200px 560px at 50% -220px,
+      rgba(99, 102, 241, 0.16),
+      rgba(45, 212, 191, 0.08) 50%,
+      transparent 72%
+    );
 
-  --td-shadow-xs: 0 1px 2px rgba(23, 26, 36, 0.05);
-  --td-shadow-sm: 0 1px 3px rgba(23, 26, 36, 0.07), 0 1px 2px rgba(23, 26, 36, 0.04);
-  --td-shadow-md: 0 6px 16px -6px rgba(23, 26, 36, 0.12), 0 2px 6px -2px rgba(23, 26, 36, 0.06);
-  --td-shadow-lg: 0 20px 44px -12px rgba(79, 70, 229, 0.22);
+  --td-shadow-xs: 0 1px 2px rgba(60, 70, 120, 0.06);
+  --td-shadow-sm: 0 1px 3px rgba(60, 70, 120, 0.08), 0 1px 2px rgba(60, 70, 120, 0.04);
+  --td-shadow-md: 0 10px 28px -10px rgba(60, 70, 120, 0.2), 0 2px 8px -3px rgba(60, 70, 120, 0.08);
+  --td-shadow-lg: 0 24px 48px -14px rgba(79, 70, 229, 0.28);
+
+  /* ---- 玻璃模糊 ---- */
+  --td-blur: blur(20px) saturate(1.5);
+  --td-blur-sm: blur(12px) saturate(1.4);
 
   /* ---- Typography ---- */
   --td-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -70,13 +79,13 @@
 }
 
 .dark {
-  /* ---- Semantic: Dark ---- */
-  --td-bg: #0b0d13;
-  --td-bg-subtle: #10131c;
-  --td-surface: #141826;
-  --td-surface-hover: #1a1f30;
-  --td-border: #232a3d;
-  --td-border-strong: #313a52;
+  /* ---- Semantic: Dark · Aurora 玻璃 ---- */
+  --td-bg: #0c0e18;
+  --td-bg-subtle: rgba(255, 255, 255, 0.05);
+  --td-surface: rgba(22, 26, 42, 0.55);
+  --td-surface-hover: rgba(32, 37, 58, 0.7);
+  --td-border: rgba(255, 255, 255, 0.08);
+  --td-border-strong: rgba(129, 140, 248, 0.35);
   --td-text: #e8ebf4;
   --td-text-secondary: #b3bad0;
   --td-text-muted: #7b8398;
@@ -86,12 +95,17 @@
   --td-primary-contrast: #0b0d13;
   --td-accent: #a78bfa;
   --td-gradient-brand: linear-gradient(135deg, #818cf8 0%, #a78bfa 55%, #e879f9 100%);
-  --td-gradient-hero: radial-gradient(1200px 500px at 50% -200px, rgba(129, 140, 248, 0.18), transparent 70%);
+  --td-gradient-hero: radial-gradient(
+      1200px 560px at 50% -220px,
+      rgba(129, 140, 248, 0.2),
+      rgba(34, 211, 238, 0.08) 50%,
+      transparent 72%
+    );
 
   --td-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
   --td-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --td-shadow-md: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
-  --td-shadow-lg: 0 20px 44px -12px rgba(99, 102, 241, 0.35);
+  --td-shadow-md: 0 10px 28px -10px rgba(0, 0, 0, 0.65);
+  --td-shadow-lg: 0 24px 48px -14px rgba(99, 102, 241, 0.35);
 }
 
 /* ---- Component tokens ---- */

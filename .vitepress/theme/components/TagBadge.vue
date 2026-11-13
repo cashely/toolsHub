@@ -17,9 +17,14 @@ defineProps<{
   font-size: 12px;
   font-weight: 500;
   color: var(--td-text-secondary);
-  background: var(--td-bg-subtle);
-  border: 1px solid var(--td-border);
+  background: var(--td-gray-100);
+  border: 1px solid var(--td-gray-200);
   border-radius: var(--td-radius-pill);
   white-space: nowrap;
+}
+
+.dark .tag-badge {
+  background: #202536;
+  border-color: rgba(255, 255, 255, 0.07);
 }
 </style>

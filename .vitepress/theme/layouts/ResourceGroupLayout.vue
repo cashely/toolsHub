@@ -107,6 +107,8 @@ const groups = ((frontmatter.value.groups ?? []) as ResourceGroup[]).map((group)
   margin-bottom: 20px;
   padding: 24px 28px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
 }

@@ -208,11 +208,15 @@ function onKeydown(e: KeyboardEvent) {
 .panel {
   width: 100%;
   max-width: 620px;
-  background: var(--td-surface);
+  background: #ffffff;
   border: 1px solid var(--td-border);
   border-radius: var(--td-radius-lg);
   box-shadow: var(--td-shadow-lg);
   overflow: hidden;
+}
+
+.dark .panel {
+  background: #171b28;
 }
 
 .input-row {

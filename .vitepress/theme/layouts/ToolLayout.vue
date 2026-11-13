@@ -163,6 +163,8 @@ const related = computed(() => {
   margin-top: 24px;
   padding: 28px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
   box-shadow: var(--td-shadow-xs);
@@ -258,6 +260,8 @@ const related = computed(() => {
 .content-card {
   padding: 32px 36px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
 }
@@ -273,6 +277,8 @@ const related = computed(() => {
 .side-card {
   padding: 20px 22px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-lg);
 }

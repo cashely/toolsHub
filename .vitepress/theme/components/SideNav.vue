@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useData } from 'vitepress'
 import {
   site,
@@ -43,12 +43,53 @@ function toggleDark() {
   isDark.value = !isDark.value
 }
 
-const secondaryLinks = [
-  { name: 'Agent 生态', path: '/agent/' },
-  { name: '专题合集', path: '/collections/' },
-  { name: '关于', path: '/about' },
-  { name: '投稿', path: '/submit' },
-]
+/* ---------- 滑动玻璃高亮块：hover 与滚动激活共用 ---------- */
+const navEl = ref<HTMLElement | null>(null)
+const hoveredId = ref('')
+const cursorReady = ref(false)
+const cursorStyle = ref<Record<string, string>>({
+  transform: 'translateY(0px)',
+  height: '0px',
+  opacity: '0',
+})
+
+/** 高亮跟随目标：hover 优先，否则当前激活项 */
+const targetId = computed(() => hoveredId.value || props.activeId)
+
+function moveCursor() {
+  const nav = navEl.value
+  if (!nav) return
+  const target = targetId.value
+    ? nav.querySelector<HTMLElement>(
+        `.sn-cat-item[data-id="${targetId.value}"]`,
+      )
+    : null
+  if (!target) {
+    cursorStyle.value = { ...cursorStyle.value, opacity: '0' }
+    return
+  }
+  cursorStyle.value = {
+    transform: `translateY(${target.offsetTop}px)`,
+    height: `${target.offsetHeight}px`,
+    opacity: '1',
+  }
+}
+
+function onNavOver(e: MouseEvent) {
+  const item = (e.target as HTMLElement | null)?.closest<HTMLElement>(
+    '.sn-cat-item',
+  )
+  if (item?.dataset.id) hoveredId.value = item.dataset.id
+}
+
+watch(targetId, () => nextTick(moveCursor))
+
+onMounted(() => {
+  nextTick(() => {
+    moveCursor()
+    cursorReady.value = true
+  })
+})
 </script>
 
 <template>
@@ -66,20 +107,23 @@ const secondaryLinks = [
       <span class="sn-brand-name">{{ site.name }}</span>
     </a>
 
-    <button class="sn-search-trigger" @click="openSearch">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <circle cx="11" cy="11" r="7" />
-        <path d="m20 20-3.5-3.5" />
-      </svg>
-      <span>搜索工具…</span>
-      <kbd>⌘K</kbd>
-    </button>
-
-    <nav class="sn-cat-nav">
+    <nav
+      ref="navEl"
+      class="sn-cat-nav"
+      @mouseover="onNavOver"
+      @mouseleave="hoveredId = ''"
+    >
+      <span
+        class="sn-cat-cursor"
+        :class="{ ready: cursorReady }"
+        :style="cursorStyle"
+        aria-hidden="true"
+      />
       <component
         :is="mode === 'link' ? 'a' : 'button'"
         v-for="g in groups"
         :key="g.id"
+        :data-id="g.id"
         class="sn-cat-item"
         :class="{ active: activeId === g.id }"
         :href="mode === 'link' ? `/#${g.id}` : undefined"
@@ -94,16 +138,6 @@ const secondaryLinks = [
     </nav>
 
     <div class="sn-sidebar-bottom">
-      <nav class="sn-secondary-nav">
-        <a
-          v-for="link in secondaryLinks"
-          :key="link.path"
-          :href="link.path"
-          class="sn-secondary-link"
-        >
-          {{ link.name }}
-        </a>
-      </nav>
       <div class="sn-bottom-actions">
         <button class="sn-icon-btn" @click="toggleDark" aria-label="切换主题">
           <svg v-if="isDark" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
@@ -191,6 +225,8 @@ const secondaryLinks = [
   height: 100vh;
   padding: 22px 14px 16px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border-right: 1px solid var(--td-border);
 }
 
@@ -217,47 +253,43 @@ const secondaryLinks = [
   letter-spacing: -0.01em;
 }
 
-.sn-search-trigger {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  height: 38px;
-  margin: 18px 4px 14px;
-  padding: 0 11px;
-  font-size: 13px;
-  color: var(--td-text-muted);
-  background: var(--td-bg-subtle);
-  border: 1px solid var(--td-border);
-  border-radius: var(--td-radius-md);
-  transition: border-color 0.15s, color 0.15s;
-}
-
-.sn-search-trigger:hover {
-  border-color: var(--td-border-strong);
-  color: var(--td-text-secondary);
-}
-
-.sn-search-trigger span {
-  flex: 1;
-  text-align: left;
-}
-
-.sn-search-trigger kbd {
-  font-size: 11px;
-  padding: 2px 6px;
-  border: 1px solid var(--td-border);
-  border-radius: 5px;
-  background: var(--td-surface);
-  color: var(--td-text-muted);
-}
-
 .sn-cat-nav {
+  position: relative;
   flex: 1;
+  margin: 16px -14px 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding-right: 2px;
+  gap: 1px;
+}
+
+/* 滑动玻璃高亮块：hover / scroll spy 共用同一块 */
+.sn-cat-cursor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: var(--td-blur-sm);
+  -webkit-backdrop-filter: var(--td-blur-sm);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(99, 102, 241, 0.12);
+}
+
+.sn-cat-cursor.ready {
+  transition:
+    transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+}
+
+.dark .sn-cat-cursor {
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .sn-cat-item {
@@ -266,38 +298,29 @@ const secondaryLinks = [
   align-items: center;
   gap: 11px;
   width: 100%;
-  padding: 8px 10px;
+  padding: 9px 12px 9px 26px;
   font-size: 14px;
   color: var(--td-text-secondary);
   background: transparent;
   border: none;
-  border-radius: var(--td-radius-sm);
+  border-radius: 0;
   text-align: left;
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+  transition: color 0.15s;
 }
 
 .sn-cat-item:hover {
-  background: var(--td-bg-subtle);
-  color: var(--td-text);
+  color: #3730a3;
 }
 
 .sn-cat-item.active {
-  background: var(--td-primary-soft);
-  color: var(--td-primary);
+  color: #3730a3;
   font-weight: 600;
 }
 
-.sn-cat-item.active::before {
-  content: '';
-  position: absolute;
-  left: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 18px;
-  border-radius: 0 3px 3px 0;
-  background: var(--td-primary);
+.dark .sn-cat-item:hover,
+.dark .sn-cat-item.active {
+  color: #dbe2ff;
 }
 
 .sn-cat-icon {
@@ -312,6 +335,7 @@ const secondaryLinks = [
   flex-shrink: 0;
 }
 
+.sn-cat-item:hover .sn-cat-icon,
 .sn-cat-item.active .sn-cat-icon {
   background: transparent;
   color: var(--td-primary);
@@ -327,6 +351,7 @@ const secondaryLinks = [
   color: var(--td-text-muted);
 }
 
+.sn-cat-item:hover .sn-cat-count,
 .sn-cat-item.active .sn-cat-count {
   color: var(--td-primary);
 }
@@ -335,23 +360,6 @@ const secondaryLinks = [
   margin-top: 10px;
   padding-top: 12px;
   border-top: 1px solid var(--td-border);
-}
-
-.sn-secondary-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 14px;
-  padding: 0 8px 10px;
-}
-
-.sn-secondary-link {
-  font-size: 12.5px;
-  color: var(--td-text-muted);
-  transition: color 0.15s;
-}
-
-.sn-secondary-link:hover {
-  color: var(--td-text);
 }
 
 .sn-bottom-actions {
@@ -432,11 +440,16 @@ const secondaryLinks = [
     padding: 6px 14px;
     font-size: 13px;
     color: var(--td-text-secondary);
-    background: var(--td-surface);
-    border: 1px solid var(--td-border);
+    background: #ffffff;
+    border: 1px solid var(--td-gray-200);
     border-radius: var(--td-radius-pill);
     text-decoration: none;
     transition: all 0.15s;
+  }
+
+  .dark .sn-chip {
+    background: #1c2132;
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   .sn-chip.active {

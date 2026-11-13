@@ -130,6 +130,8 @@ const list = computed(() => {
 .content-card {
   padding: 28px 32px;
   background: var(--td-surface);
+  backdrop-filter: var(--td-blur);
+  -webkit-backdrop-filter: var(--td-blur);
   border: var(--td-card-border);
   border-radius: var(--td-radius-xl);
 }
