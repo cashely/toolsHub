@@ -1,0 +1,7 @@
+[build]
+  # VitePress: prebuild generates the content index, then vitepress builds the site
+  command = "npm run build"
+  publish = ".vitepress/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
