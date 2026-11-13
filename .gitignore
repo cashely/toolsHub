@@ -4,3 +4,5 @@ node_modules/
 .vitepress/theme/generated/
 .DS_Store
 *.log
+.vercel
+.env*
