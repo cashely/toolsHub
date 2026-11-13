@@ -264,7 +264,7 @@ const related = computed(() => {
 
 .sidebar {
   position: sticky;
-  top: calc(var(--td-header-height) + 16px);
+  top: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;

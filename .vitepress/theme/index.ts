@@ -4,7 +4,7 @@ import { useData } from 'vitepress'
 import './styles/tokens.css'
 import './styles/base.css'
 
-import HomeLayout from './layouts/HomeLayout.vue'
+import SinglePageLayout from './layouts/SinglePageLayout.vue'
 import ToolLayout from './layouts/ToolLayout.vue'
 import CategoryLayout from './layouts/CategoryLayout.vue'
 import CollectionLayout from './layouts/CollectionLayout.vue'
@@ -17,7 +17,7 @@ import PageLayout from './layouts/PageLayout.vue'
 import ResourceGroupLayout from './layouts/ResourceGroupLayout.vue'
 
 const layouts: Record<string, any> = {
-  home: HomeLayout,
+  'single-page': SinglePageLayout,
   tool: ToolLayout,
   category: CategoryLayout,
   collection: CollectionLayout,
