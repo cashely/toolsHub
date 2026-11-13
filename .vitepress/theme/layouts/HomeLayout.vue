@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import SiteChrome from '../components/SiteChrome.vue'
+import HeroBackdrop from '../components/HeroBackdrop.vue'
 import CategoryCard from '../components/CategoryCard.vue'
 import ToolGrid from '../components/ToolGrid.vue'
 import CollectionCardComponent from '../components/CollectionCard.vue'
@@ -36,7 +37,8 @@ const hotTags = computed(() =>
   <SiteChrome>
     <!-- Hero -->
     <section class="hero">
-      <div class="td-container">
+      <HeroBackdrop />
+      <div class="td-container hero-content">
         <div class="hero-badge">
           <span class="dot" />
           已收录 {{ publishedTools.length }}+ 优质工具
@@ -171,6 +173,12 @@ const hotTags = computed(() =>
   padding: 92px 0 72px;
   text-align: center;
   background: var(--td-gradient-hero);
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-badge {

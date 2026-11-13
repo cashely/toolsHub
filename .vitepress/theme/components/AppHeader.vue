@@ -46,6 +46,12 @@ function toggleDark() {
           :class="{ active: isActive(item.path) }"
         >
           {{ item.name }}
+          <span v-if="item.path === '/agent/'" class="nav-badge">
+            <svg class="nav-badge-star" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z" />
+            </svg>
+            <span class="nav-badge-text">skills</span>
+          </span>
         </a>
       </nav>
 
@@ -94,6 +100,12 @@ function toggleDark() {
         class="mobile-link"
       >
         {{ item.name }}
+        <span v-if="item.path === '/agent/'" class="nav-badge mobile">
+          <svg class="nav-badge-star" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z" />
+          </svg>
+          <span class="nav-badge-text">skills</span>
+        </span>
       </a>
     </nav>
   </header>
@@ -148,12 +160,55 @@ function toggleDark() {
 }
 
 .nav-link {
+  position: relative;
   padding: 7px 13px;
   font-size: 14px;
   font-weight: 500;
   color: var(--td-text-secondary);
   border-radius: var(--td-radius-sm);
   transition: color 0.15s, background 0.15s;
+}
+
+.nav-badge {
+  position: absolute;
+  top: 0;
+  right: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.nav-badge.mobile {
+  position: static;
+  margin-left: 6px;
+}
+
+.nav-badge-star {
+  width: 10px;
+  height: 10px;
+  color: #f5a524;
+  filter: drop-shadow(0 0 3px rgba(245, 165, 36, 0.6));
+  animation: nav-badge-blink 1.2s ease-in-out infinite;
+}
+
+.nav-badge-text {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.3px;
+  color: #f5a524;
+}
+
+@keyframes nav-badge-blink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
 }
 
 .nav-link:hover {
